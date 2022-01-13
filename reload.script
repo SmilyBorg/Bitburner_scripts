@@ -1,3 +1,5 @@
+// This is a modified version of the Automating the Script Startup Process script from the Getting Started guide. 
+
 tprint("Rebooting the matrix ...");
 
 var serverBaseName = "Bob-";
