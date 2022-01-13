@@ -1,0 +1,94 @@
+// This is a modified version of the Hacknet Node buying script from the Examples section of the Hacknet Node API documentation.
+// It doesn't quite work as advertied yet, but gets 32 close to fully maxed out HackNet nodes. Needs some tweaking to get max. Need to do the math on efficiency. 
+
+function myMoney() {
+	return getServerMoneyAvailable("home");
+}
+
+disableLog("getServerMoneyAvailable");
+disableLog("sleep");
+
+var cnt = 32;
+
+while (hacknet.numNodes() < cnt) {
+	res = hacknet.purchaseNode();
+	print("Purchased hacknet Node with index " + res);
+};
+
+for (var i = 0; i < cnt; i++) {
+	while (hacknet.getNodeStats(i).level <= 80) {
+		var cost = hacknet.getLevelUpgradeCost(i, 10);
+		while (myMoney() < cost) {
+			print("Need $" + cost + " . Have $" + myMoney());
+			sleep(3000);
+		}
+		res = hacknet.upgradeLevel(i, 10);
+	};
+};
+
+print("All nodes upgraded to level 80");
+
+for (var i = 0; i < cnt; i++) {
+	while (hacknet.getNodeStats(i).ram < 16) {
+		var cost = hacknet.getRamUpgradeCost(i, 2);
+		while (myMoney() < cost) {
+			print("Need $" + cost + " . Have $" + myMoney());
+			sleep(3000);
+		}
+		res = hacknet.upgradeRam(i, 2);
+	};
+};
+
+print("All nodes upgraded to 16GB RAM");
+
+for (var i = 0; i < cnt; i++) {
+	while (hacknet.getNodeStats(i).cores < 8) {
+		var cost = hacknet.getCoreUpgradeCost(i, 1);
+		while (myMoney() < cost) {
+			print("Need $" + cost + " . Have $" + myMoney());
+			sleep(3000);
+		}
+		res = hacknet.upgradeCore(i, 1);
+	};
+};
+
+print("All nodes upgraded to 8 cores");
+
+for (var i = 0; i < cnt; i++) {
+	while (hacknet.getNodeStats(i).level <= 190) {
+		var cost = hacknet.getLevelUpgradeCost(i, 10);
+		while (myMoney() < cost) {
+			print("Need $" + cost + " . Have $" + myMoney());
+			sleep(3000);
+		}
+		res = hacknet.upgradeLevel(i, 10);
+	};
+};
+
+print("All nodes upgraded to level 200");
+
+for (var i = 0; i < cnt; i++) {
+	while (hacknet.getNodeStats(i).ram < 32) {
+		var cost = hacknet.getRamUpgradeCost(i, 2);
+		while (myMoney() < cost) {
+			print("Need $" + cost + " . Have $" + myMoney());
+			sleep(3000);
+		}
+		res = hacknet.upgradeRam(i, 2);
+	};
+};
+
+print("All nodes upgraded to 64GB RAM");
+
+for (var i = 0; i < cnt; i++) {
+	while (hacknet.getNodeStats(i).cores < 15) {
+		var cost = hacknet.getCoreUpgradeCost(i, 1);
+		while (myMoney() < cost) {
+			print("Need $" + cost + " . Have $" + myMoney());
+			sleep(3000);
+		}
+		res = hacknet.upgradeCore(i, 1);
+	};
+};
+
+print("All nodes upgraded to 16 cores");
